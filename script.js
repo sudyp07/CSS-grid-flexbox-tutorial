@@ -1,3 +1,8 @@
+/* ============================================================
+   Sudyp Studio — Flexbox & Grid, Visualized
+   script.js — app state, rendering, controls, code generation
+   Built by Sudip Nepal (https://github.com/sudyp07)
+   ============================================================ */
 (function(){
 "use strict";
 
@@ -587,6 +592,8 @@ function cssLine(prop, val){
 
 function generateCSSLines(){
   const lines = [];
+  lines.push(`<span class="tk-comment">/* Built with Sudyp Studio — by Sudip Nepal (github.com/sudyp07) */</span>`);
+  lines.push("");
   lines.push(`<span class="tk-comment">/* Container */</span>`);
   lines.push(`<span class="tk-sel">.container</span> <span class="tk-punc">{</span>`);
   if(state.mode==="flex"){
@@ -791,14 +798,14 @@ $("#gridLinesToggle").addEventListener("change", (e)=>{
 
 $("#saveBtn").addEventListener("click", ()=>{
   try{
-    localStorage.setItem("axis-flexgrid-state", JSON.stringify({mode:state.mode, flex:state.flex, grid:state.grid, items:state.items}));
+    localStorage.setItem("sudyp-flexgrid-state", JSON.stringify({mode:state.mode, flex:state.flex, grid:state.grid, items:state.items}));
     toast("Layout saved to browser storage","success","fa-floppy-disk");
   }catch(err){ toast("Could not save (storage unavailable)","warn"); }
 });
 
 function tryRestore(){
   try{
-    const raw = localStorage.getItem("axis-flexgrid-state");
+    const raw = localStorage.getItem("sudyp-flexgrid-state");
     if(!raw) return;
     const saved = JSON.parse(raw);
     if(saved && saved.flex && saved.grid && Array.isArray(saved.items) && saved.items.length){
@@ -908,7 +915,7 @@ renderPresets();
 syncModeUI();
 applyViewport();
 renderAll();
-setTimeout(()=>toast("Welcome to Axis — press 1/2 to switch modes, Space to shuffle","info","fa-hand-sparkles"), 500);
+setTimeout(()=>toast("Welcome to Sudyp Studio — press 1/2 to switch modes, Space to shuffle","info","fa-hand-sparkles"), 500);
 
 window.addEventListener("resize", ()=>renderGridOverlay());
 

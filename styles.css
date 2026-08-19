@@ -1,5 +1,6 @@
 /* ============================================================
-   AXIS — Flexbox & Grid Mastery
+   SUDYP STUDIO — Flexbox & Grid, Visualized
+   Built by Sudip Nepal — https://github.com/sudyp07
    Design: ink-black studio surface, dual-accent axis language.
    Cyan  = Flexbox axis (--flex-accent)
    Violet= Grid axis    (--grid-accent)
@@ -335,6 +336,9 @@ body.mode-grid .mode-switch .thumb{ transform:translateX(100%); background:linea
 }
 .statusbar span{display:flex; align-items:center; gap:6px;}
 .statusbar .sp{flex:1;}
+.statusbar .credit{opacity:.85;}
+.statusbar .credit a{color:#04100e; font-weight:700; text-decoration:none; border-bottom:1.5px solid #04100e88;}
+.statusbar .credit a:hover{border-bottom-color:#04100e;}
 
 /* ---------------- Toasts ---------------- */
 #toast-stack{position:fixed; bottom:44px; right:20px; z-index:999; display:flex; flex-direction:column; gap:9px; align-items:flex-end;}
