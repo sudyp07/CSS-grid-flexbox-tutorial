@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axis // Flexbox &amp; Grid Mastery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <div class="brand"><div class="mark">⬡</div>AXIS <small>FLEX / GRID STUDIO</small></div>
+
+    <div class="mode-switch" id="modeSwitch" role="tablist" aria-label="Layout mode">
+      <div class="thumb"></div>
+      <button data-mode="flex" class="active" role="tab" aria-selected="true"><i class="fa-solid fa-arrows-left-right"></i>Flexbox</button>
+      <button data-mode="grid" role="tab" aria-selected="false"><i class="fa-solid fa-table-cells"></i>Grid</button>
+    </div>
+
+    <div class="topbar-group" data-tooltip="Toggle controls panel">
+      <button class="icon-btn active" id="toggleSidebar"><i class="fa-solid fa-sliders"></i></button>
+    </div>
+
+    <div class="topbar-spacer"></div>
+
+    <div class="viewport-group" role="group" aria-label="Responsive preview">
+      <button data-vp="desktop" class="active" data-tooltip="Desktop preview (100%)"><i class="fa-solid fa-desktop"></i></button>
+      <button data-vp="tablet" data-tooltip="Tablet preview (768px)"><i class="fa-solid fa-tablet-screen-button"></i></button>
+      <button data-vp="mobile" data-tooltip="Mobile preview (390px)"><i class="fa-solid fa-mobile-screen-button"></i></button>
+    </div>
+
+    <div class="topbar-group">
+      <button class="pill-btn" id="challengeBtn" data-tooltip="Get a random layout goal to recreate"><i class="fa-solid fa-flag-checkered"></i>Challenge</button>
+      <button class="pill-btn" id="randomizeBtn" data-tooltip="Randomize properties (Space)"><i class="fa-solid fa-dice"></i></button>
+      <button class="pill-btn" id="resetBtn" data-tooltip="Reset to defaults (R)"><i class="fa-solid fa-rotate-left"></i></button>
+      <button class="pill-btn" id="saveBtn" data-tooltip="Save layout to browser storage"><i class="fa-solid fa-floppy-disk"></i></button>
+      <button class="icon-btn" id="toggleCode" data-tooltip="Toggle code panel"><i class="fa-solid fa-code"></i></button>
+    </div>
+  </header>
+
+  <!-- ============ MAIN LAYOUT ============ -->
+  <div class="main-layout">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+
+      <!-- Presets -->
+      <div class="side-section" data-section="presets">
+        <div class="side-section-head"><h3><i class="fa-solid fa-shapes"></i>Layout Presets</h3><i class="fa-solid fa-chevron-down chev"></i></div>
+        <div class="side-section-body">
+          <div class="preset-list" id="presetList"></div>
+        </div>
+      </div>
+
+      <!-- Container properties -->
+      <div class="side-section" data-section="container">
+        <div class="side-section-head"><h3><i class="fa-solid fa-border-all"></i>Container</h3><i class="fa-solid fa-chevron-down chev"></i></div>
+        <div class="side-section-body" id="containerControls"></div>
+      </div>
+
+      <!-- Items -->
+      <div class="side-section" data-section="items">
+        <div class="side-section-head"><h3><i class="fa-solid fa-cubes"></i>Items</h3><i class="fa-solid fa-chevron-down chev"></i></div>
+        <div class="side-section-body">
+          <div class="field">
+            <div class="field-label">Item count</div>
+            <div class="row-2">
+              <button class="mini-btn" id="addItemBtn"><i class="fa-solid fa-plus"></i> Add item</button>
+              <button class="mini-btn" id="removeItemBtn"><i class="fa-solid fa-minus"></i> Remove</button>
+            </div>
+          </div>
+          <div class="field" style="font-size:11px; color:var(--text-lo); font-family:var(--mono);">
+            Drag items to reorder · Double-click to recolor
+          </div>
+        </div>
+      </div>
+
+      <!-- Selected item -->
+      <div class="side-section" data-section="selected">
+        <div class="side-section-head"><h3><i class="fa-solid fa-hand-pointer"></i>Selected Item</h3><i class="fa-solid fa-chevron-down chev"></i></div>
+        <div class="side-section-body" id="itemControls"></div>
+      </div>
+
+    </aside>
+
+    <!-- ============ CANVAS ============ -->
+    <main class="canvas-area">
+      <div class="canvas-toolbar">
+        <span class="axis-tag" id="axisTag"><i class="fa-solid fa-arrows-left-right"></i> row · main-axis →</span>
+        <div class="divider"></div>
+        <span style="font-family:var(--mono); font-size:11px; color:var(--text-lo);" id="itemCountTag">6 items</span>
+        <div class="divider"></div>
+        <label style="display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-md); cursor:pointer;">
+          <input type="checkbox" id="gridLinesToggle" checked style="accent-color:var(--grid-accent);"> Grid lines
+        </label>
+      </div>
+
+      <div class="challenge-banner" id="challengeBanner">
+        <i class="fa-solid fa-bullseye ch-ic"></i>
+        <div class="ch-txt" id="challengeText"></div>
+        <div class="ch-actions">
+          <button class="pill-btn" id="checkChallengeBtn"><i class="fa-solid fa-check"></i> Check</button>
+          <button class="icon-btn" id="closeChallengeBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <div class="canvas-scroll">
+        <div class="frame-wrap" id="frameWrap">
+          <div class="frame-label"><span>Container preview</span><b id="frameSize">100% width</b></div>
+          <div id="playground" role="group" aria-label="Layout playground">
+            <div class="grid-overlay" id="gridOverlay"></div>
+            <div class="axis-indicator" id="axisIndicator"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ============ CODE PANEL ============ -->
+    <section class="code-panel" id="codePanel">
+      <div class="code-head">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="fname" id="codeFileName">styles.css</span>
+        <div class="code-head-actions">
+          <button class="icon-btn" id="copyCodeBtn" data-tooltip="Copy CSS to clipboard"><i class="fa-solid fa-copy"></i></button>
+          <button class="icon-btn" id="downloadCodeBtn" data-tooltip="Download as .css file"><i class="fa-solid fa-download"></i></button>
+        </div>
+      </div>
+      <div class="code-tabs">
+        <button class="code-tab active" data-tab="css">CSS</button>
+        <button class="code-tab" data-tab="html">HTML</button>
+      </div>
+      <div class="code-body" id="codeBody"></div>
+    </section>
+  </div>
+
+  <!-- ============ STATUS BAR ============ -->
+  <footer class="statusbar">
+    <span><i class="fa-solid fa-circle-nodes"></i><b id="statusMode">FLEXBOX</b></span>
+    <span id="statusDetail">row · nowrap · justify-content: flex-start</span>
+    <span class="sp"></span>
+    <span id="statusItems"><i class="fa-solid fa-cube"></i> 6 items</span>
+    <span><span class="kbd">1</span>/<span class="kbd">2</span> mode · <span class="kbd">R</span> reset · <span class="kbd">Space</span> shuffle</span>
+  </footer>
+</div>
+
+<div id="toast-stack"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
